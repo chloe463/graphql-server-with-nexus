@@ -1,7 +1,7 @@
 import { queryField } from "nexus";
 import axios from "axios";
 
-export const question = queryField("questions", {
+export const questions = queryField("questions", {
   type: "Question",
   list: true,
   nullable: false,
