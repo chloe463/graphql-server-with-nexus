@@ -10,6 +10,7 @@ type Option {
 
 type Query {
   options: [Option!]!
+  questionnaire(id: Int): Questionnaire!
   questionnaires: [Questionnaire!]!
   questions: [Question!]!
 }

@@ -59,6 +59,7 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     options: NexusGenRootTypes['Option'][]; // [Option!]!
+    questionnaire: NexusGenRootTypes['Questionnaire']; // Questionnaire!
     questionnaires: NexusGenRootTypes['Questionnaire'][]; // [Questionnaire!]!
     questions: NexusGenRootTypes['Question'][]; // [Question!]!
   }
@@ -81,6 +82,11 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenArgTypes {
+  Query: {
+    questionnaire: { // args
+      id?: number | null; // Int
+    }
+  }
 }
 
 export interface NexusGenAbstractResolveReturnTypes {
