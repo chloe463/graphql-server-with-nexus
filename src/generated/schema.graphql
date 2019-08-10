@@ -2,8 +2,25 @@
 ### Do not make changes to this file directly
 
 
+type Option {
+  id: Int!
+  questionId: Int!
+  text: String!
+}
+
 type Query {
+  options: [Option!]!
   questionnaires: [Questionnaire!]!
+  questions: [Question!]!
+}
+
+type Question {
+  id: Int!
+  questionnaireId: Int!
+  required: Boolean!
+  text: String!
+  type: String!
+  typeCd: Int!
 }
 
 type Questionnaire {

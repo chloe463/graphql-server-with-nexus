@@ -19,7 +19,20 @@ export interface NexusGenEnums {
 }
 
 export interface NexusGenRootTypes {
+  Option: { // root type
+    id: number; // Int!
+    questionId: number; // Int!
+    text: string; // String!
+  }
   Query: {};
+  Question: { // root type
+    id: number; // Int!
+    questionnaireId: number; // Int!
+    required: boolean; // Boolean!
+    text: string; // String!
+    type: string; // String!
+    typeCd: number; // Int!
+  }
   Questionnaire: { // root type
     description: string; // String!
     end_at: string; // String!
@@ -39,8 +52,23 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 }
 
 export interface NexusGenFieldTypes {
+  Option: { // field return type
+    id: number; // Int!
+    questionId: number; // Int!
+    text: string; // String!
+  }
   Query: { // field return type
+    options: NexusGenRootTypes['Option'][]; // [Option!]!
     questionnaires: NexusGenRootTypes['Questionnaire'][]; // [Questionnaire!]!
+    questions: NexusGenRootTypes['Question'][]; // [Question!]!
+  }
+  Question: { // field return type
+    id: number; // Int!
+    questionnaireId: number; // Int!
+    required: boolean; // Boolean!
+    text: string; // String!
+    type: string; // String!
+    typeCd: number; // Int!
   }
   Questionnaire: { // field return type
     description: string; // String!
@@ -60,7 +88,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Query" | "Questionnaire";
+export type NexusGenObjectNames = "Option" | "Query" | "Question" | "Questionnaire";
 
 export type NexusGenInputNames = never;
 
