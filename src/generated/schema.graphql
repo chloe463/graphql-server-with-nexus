@@ -17,6 +17,7 @@ type Query {
 
 type Question {
   id: Int!
+  options: [Option!]!
   questionnaireId: Int!
   required: Boolean!
   text: String!
@@ -28,6 +29,7 @@ type Questionnaire {
   description: String!
   end_at: String!
   id: Int!
+  questions: [Question!]!
   start_at: String!
   state: String!
   title: String!

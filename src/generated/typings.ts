@@ -65,6 +65,7 @@ export interface NexusGenFieldTypes {
   }
   Question: { // field return type
     id: number; // Int!
+    options: NexusGenRootTypes['Option'][]; // [Option!]!
     questionnaireId: number; // Int!
     required: boolean; // Boolean!
     text: string; // String!
@@ -75,6 +76,7 @@ export interface NexusGenFieldTypes {
     description: string; // String!
     end_at: string; // String!
     id: number; // Int!
+    questions: NexusGenRootTypes['Question'][]; // [Question!]!
     start_at: string; // String!
     state: string; // String!
     title: string; // String!
