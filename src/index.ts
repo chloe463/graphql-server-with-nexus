@@ -2,11 +2,13 @@ import express from "express";
 import { ApolloServer } from "apollo-server-express";
 
 import { schema } from "./schema";
+import { createContext } from "./context";
 
 const app = express();
 
 const apolloServer = new ApolloServer({
   schema,
+  context: createContext,
 });
 
 apolloServer.applyMiddleware({

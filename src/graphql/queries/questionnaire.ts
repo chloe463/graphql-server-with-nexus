@@ -5,9 +5,8 @@ export const questionnaires = queryField("questionnaires", {
   type: "Questionnaire",
   list: true,
   nullable: false,
-  resolve: async (_root, _args, _context) => {
-    const res = await axios.get("http://localhost:3000/questionnaires");
-    return res.data;
+  resolve: async (_root, _args, { questionnaireRailsApi }) => {
+    return await questionnaireRailsApi.fetchQuestionnaires();
   },
 });
 
@@ -17,9 +16,10 @@ export const questionnaire = queryField("questionnaire", {
   args: {
     id: intArg(),
   },
-  resolve: async (_root, args, _context) => {
+  resolve: async (_root, args, { questionnaireRailsApi }) => {
     const id = args.id;
-    const res = await axios.get(`http://localhost:3000/questionnaires/${id}`);
-    return res.data;
+    // const res = await axios.get(`http://localhost:3000/questionnaires/${id}`);
+    // return res.data;
+    return await questionnaireRailsApi.fetchQuestionnaire(id);
   },
 });
