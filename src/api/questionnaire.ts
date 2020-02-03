@@ -43,4 +43,28 @@ export class QuestionnaireApi {
     const res = await this.axiosClient.get(`${this.baseUrl}/questionnaires`);
     return res.data;
   }
+
+  public async fetchQuestionnaire(id: number) {
+    const res = await this.axiosClient.get(`${this.baseUrl}/questionnaires/${id}`);
+    return res.data;
+  }
+
+  public async fetchQuestions() {
+    const res = await this.axiosClient.get(`${this.baseUrl}/questions`);
+    return res.data;
+  }
+
+  public async fetchQuestionsByQuestionnaireId(questionnaireIds: number[]) {
+    const res = await this.axiosClient.get(`${this.baseUrl}/questions`, {
+      params: {
+        questionnaire_ids: questionnaireIds,
+      }
+    });
+    return res.data;
+  }
+
+  public async fetchQuestion(id: number) {
+    const res = await this.axiosClient.get(`${this.baseUrl}/questions/1`);
+    return res.data;
+  }
 }
