@@ -1,0 +1,46 @@
+import "dotenv/config";
+import { isObject } from "util";
+import camelCase from "lodash/camelCase";
+import axios, { AxiosInstance, AxiosTransformer } from "axios";
+
+
+const snakeToCamelDeep = (target: any) => {
+  if (Array.isArray(target)) {
+    return target.map(snakeToCamelDeep);
+  } else if (isObject(target)) {
+    const copy = {};
+    Object.entries(target).map(([key, value]) => {
+      copy[camelCase(key)] = snakeToCamelDeep(value);
+    });
+    return copy;
+  }
+  return target;
+};
+
+export class QuestionnaireApi {
+  private baseUrl: string;
+  private axiosClient: AxiosInstance;
+  constructor() {
+    this.baseUrl = process.env.QUESTIONNAIRE_RAILS_URL;
+    this.axiosClient = axios.create({
+      baseURL: this.baseUrl,
+      headers: {
+        accept: "application/json"
+      },
+      transformResponse:
+        ([] as AxiosTransformer[]).concat(axios.defaults.transformResponse || [],
+          (data, headers) => {
+            const contentType: string = headers["content-type"] || "";
+            if (!contentType.match(/application\/json/)) {
+              return data;
+            }
+            return snakeToCamelDeep(data);
+          })
+    });
+  }
+
+  public async fetchQuestionnaires() {
+    const res = await this.axiosClient.get(`${this.baseUrl}/questionnaires`);
+    return res.data;
+  }
+}
