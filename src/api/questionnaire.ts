@@ -68,4 +68,18 @@ export class QuestionnaireApi {
     const res = await this.axiosClient.get(`${this.baseUrl}/questions/1`);
     return res.data;
   }
+
+  public async fetchOptions() {
+    const res = await this.axiosClient.get(`${this.baseUrl}/options`);
+    return res.data;
+  }
+
+  public async fetchOptionsByQuestionId(questionIds: number[]) {
+    const res = await this.axiosClient.get<NexusGenAllTypes["Option"][]>(`${this.baseUrl}/options`, {
+      params: {
+        question_ids: questionIds,
+      },
+    });
+    return res.data;
+  }
 }

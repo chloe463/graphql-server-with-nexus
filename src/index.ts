@@ -4,9 +4,11 @@ import { ApolloServer } from "apollo-server-express";
 import { schema } from "./schema";
 import { QuestionnaireApi } from "./api/questionnaire";
 import { questionLoader } from "./graphql/loaders/questionLoader";
+import { optionLoader } from "./graphql/loaders/optionLoader";
 
 interface Context {
   questionLoader: ReturnType<typeof questionLoader>;
+  optionLoader: ReturnType<typeof optionLoader>;
   api: {
     questionnaireApi: QuestionnaireApi,
   },
@@ -16,6 +18,7 @@ const generateContext: () => Context = () => {
   const questionnaireApi = new QuestionnaireApi();
   return {
     questionLoader: questionLoader(questionnaireApi),
+    optionLoader: optionLoader(questionnaireApi),
     api: {
       questionnaireApi,
     }
