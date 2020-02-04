@@ -1,5 +1,4 @@
 import { objectType } from "nexus";
-import axios from "axios";
 
 export const Questionnaire = objectType({
   name: "Questionnaire",
