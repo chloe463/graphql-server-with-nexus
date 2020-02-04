@@ -1,3 +1,4 @@
+import { NexusGenAllTypes } from './../generated/typings';
 import "dotenv/config";
 import { isObject } from "util";
 import camelCase from "lodash/camelCase";
@@ -55,7 +56,7 @@ export class QuestionnaireApi {
   }
 
   public async fetchQuestionsByQuestionnaireId(questionnaireIds: number[]) {
-    const res = await this.axiosClient.get(`${this.baseUrl}/questions`, {
+    const res = await this.axiosClient.get<NexusGenAllTypes["Question"][]>(`${this.baseUrl}/questions`, {
       params: {
         questionnaire_ids: questionnaireIds,
       }
