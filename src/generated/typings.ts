@@ -35,9 +35,9 @@ export interface NexusGenRootTypes {
   }
   Questionnaire: { // root type
     description: string; // String!
-    end_at: string; // String!
+    endAt: string; // String!
     id: number; // Int!
-    start_at: string; // String!
+    startAt: string; // String!
     state: string; // String!
     title: string; // String!
   }
@@ -74,10 +74,10 @@ export interface NexusGenFieldTypes {
   }
   Questionnaire: { // field return type
     description: string; // String!
-    end_at: string; // String!
+    endAt: string; // String!
     id: number; // Int!
     questions: NexusGenRootTypes['Question'][]; // [Question!]!
-    start_at: string; // String!
+    startAt: string; // String!
     state: string; // String!
     title: string; // String!
   }

@@ -8,8 +8,8 @@ export const Questionnaire = objectType({
     t.string("title", { nullable: false });
     t.string("description", { nullable: false });
     t.string("state", { nullable: false });
-    t.string("start_at", { nullable: false });
-    t.string("end_at", { nullable: false });
+    t.string("startAt", { nullable: false });
+    t.string("endAt", { nullable: false });
     t.field("questions", {
       type: "Question",
       list: true,
