@@ -8,14 +8,14 @@ type BatchQuestionsFactory = (apiClient: QuestionnaireApi) => BatchQuestion;
 
 const batchQuestions: BatchQuestionsFactory = apiClient => async questionnaireIds => {
   const res = await apiClient.fetchQuestionsByQuestionnaireId(questionnaireIds);
-  const questionsByUserId: { [id: number]: NexusGenAllTypes["Question"] } = res.reduce((acc, v) => {
+  const questionsByQuestionnaireId: { [id: number]: NexusGenAllTypes["Question"] } = res.reduce((acc, v) => {
     const { questionnaireId } = v;
     return {
       ...acc,
       [questionnaireId]: acc[questionnaireId] ? [...acc[questionnaireId], v] : [v],
     }
   }, {});
-  return questionnaireIds.map(id => questionsByUserId[id]);
+  return questionnaireIds.map(id => questionsByQuestionnaireId[id]);
 };
 
 export const questionLoader = (apiClient: QuestionnaireApi) =>
