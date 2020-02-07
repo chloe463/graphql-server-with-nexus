@@ -13,7 +13,8 @@ export const Questionnaire = objectType({
       type: "Question",
       list: true,
       nullable: false,
-      resolve: async ({ id }, _args, { questionLoader }) => questionLoader.load(id),
+      // @ts-ignore
+      resolve: ({ id }, _args, { questionLoader }) => questionLoader.load(id),
     });
   },
 });

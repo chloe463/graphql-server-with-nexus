@@ -13,7 +13,8 @@ export const Question = objectType({
       type: "Option",
       list: true,
       nullable: false,
-      resolve: async ({ id }, _args, { optionLoader }) => optionLoader.load(id),
+      // @ts-ignore
+      resolve: ({ id }, _args, { optionLoader }) => optionLoader.load(id),
     })
   },
 });
