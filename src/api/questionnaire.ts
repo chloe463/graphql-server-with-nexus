@@ -1,9 +1,10 @@
-import { NexusGenAllTypes } from './../generated/typings';
+import { NexusGenAllTypes } from "./../generated/typings";
 import "dotenv/config";
 import { isObject } from "util";
 import camelCase from "lodash/camelCase";
 import axios, { AxiosInstance, AxiosTransformer } from "axios";
 
+import { NexusGenInputs } from "../generated/typings";
 
 const snakeToCamelDeep = (target: any) => {
   if (Array.isArray(target)) {
@@ -28,15 +29,16 @@ export class QuestionnaireApi {
       headers: {
         accept: "application/json"
       },
-      transformResponse:
-        ([] as AxiosTransformer[]).concat(axios.defaults.transformResponse || [],
-          (data, headers) => {
-            const contentType: string = headers["content-type"] || "";
-            if (!contentType.match(/application\/json/)) {
-              return data;
-            }
-            return snakeToCamelDeep(data);
-          })
+      transformResponse: ([] as AxiosTransformer[]).concat(
+        axios.defaults.transformResponse || [],
+        (data, headers) => {
+          const contentType: string = headers["content-type"] || "";
+          if (!contentType.match(/application\/json/)) {
+            return data;
+          }
+          return snakeToCamelDeep(data);
+        }
+      )
     });
   }
 
@@ -46,7 +48,9 @@ export class QuestionnaireApi {
   }
 
   public async fetchQuestionnaire(id: number) {
-    const res = await this.axiosClient.get(`${this.baseUrl}/questionnaires/${id}`);
+    const res = await this.axiosClient.get(
+      `${this.baseUrl}/questionnaires/${id}`
+    );
     return res.data;
   }
 
@@ -56,11 +60,14 @@ export class QuestionnaireApi {
   }
 
   public async fetchQuestionsByQuestionnaireId(questionnaireIds: number[]) {
-    const res = await this.axiosClient.get<NexusGenAllTypes["Question"][]>(`${this.baseUrl}/questions`, {
-      params: {
-        questionnaire_ids: questionnaireIds,
+    const res = await this.axiosClient.get<NexusGenAllTypes["Question"][]>(
+      `${this.baseUrl}/questions`,
+      {
+        params: {
+          questionnaire_ids: questionnaireIds
+        }
       }
-    });
+    );
     return res.data;
   }
 
@@ -75,11 +82,25 @@ export class QuestionnaireApi {
   }
 
   public async fetchOptionsByQuestionId(questionIds: number[]) {
-    const res = await this.axiosClient.get<NexusGenAllTypes["Option"][]>(`${this.baseUrl}/options`, {
-      params: {
-        question_ids: questionIds,
-      },
-    });
+    const res = await this.axiosClient.get<NexusGenAllTypes["Option"][]>(
+      `${this.baseUrl}/options`,
+      {
+        params: {
+          question_ids: questionIds
+        }
+      }
+    );
+    return res.data;
+  }
+
+  public async updateQuestionnaire(
+    param: NexusGenInputs["UpdateQuestionnaireInput"]
+  ) {
+    const { id } = param;
+    const res = await this.axiosClient.patch(
+      `${this.baseUrl}/questionnaires/${id}`,
+      { ...param }
+    );
     return res.data;
   }
 }

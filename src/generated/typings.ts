@@ -13,12 +13,21 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  UpdateQuestionnaireInput: { // input type
+    description?: string | null; // String
+    endAt?: string | null; // String
+    id: number; // Int!
+    startAt?: string | null; // String
+    state?: number | null; // Int
+    title?: string | null; // String
+  }
 }
 
 export interface NexusGenEnums {
 }
 
 export interface NexusGenRootTypes {
+  Mutation: {};
   Option: { // root type
     id: number; // Int!
     questionId: number; // Int!
@@ -41,6 +50,10 @@ export interface NexusGenRootTypes {
     state: string; // String!
     title: string; // String!
   }
+  UpdateQuestionnairePayload: { // root type
+    id: number; // Int!
+    success: boolean; // Boolean!
+  }
   String: string;
   Int: number;
   Float: number;
@@ -49,9 +62,13 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  UpdateQuestionnaireInput: NexusGenInputs['UpdateQuestionnaireInput'];
 }
 
 export interface NexusGenFieldTypes {
+  Mutation: { // field return type
+    updateQuestionnaire: NexusGenRootTypes['UpdateQuestionnairePayload']; // UpdateQuestionnairePayload!
+  }
   Option: { // field return type
     id: number; // Int!
     questionId: number; // Int!
@@ -81,9 +98,18 @@ export interface NexusGenFieldTypes {
     state: string; // String!
     title: string; // String!
   }
+  UpdateQuestionnairePayload: { // field return type
+    id: number; // Int!
+    success: boolean; // Boolean!
+  }
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    updateQuestionnaire: { // args
+      questionnaire: NexusGenInputs['UpdateQuestionnaireInput']; // UpdateQuestionnaireInput!
+    }
+  }
   Query: {
     questionnaire: { // args
       id?: number | null; // Int
@@ -96,9 +122,9 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Option" | "Query" | "Question" | "Questionnaire";
+export type NexusGenObjectNames = "Mutation" | "Option" | "Query" | "Question" | "Questionnaire" | "UpdateQuestionnairePayload";
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = "UpdateQuestionnaireInput";
 
 export type NexusGenEnumNames = never;
 
