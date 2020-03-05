@@ -3,7 +3,7 @@
  * Do not make changes to this file directly
  */
 
-
+import * as context from "../context"
 
 
 
@@ -35,9 +35,9 @@ export interface NexusGenRootTypes {
   }
   Questionnaire: { // root type
     description: string; // String!
-    end_at: string; // String!
+    endAt: string; // String!
     id: number; // Int!
-    start_at: string; // String!
+    startAt: string; // String!
     state: string; // String!
     title: string; // String!
   }
@@ -74,10 +74,10 @@ export interface NexusGenFieldTypes {
   }
   Questionnaire: { // field return type
     description: string; // String!
-    end_at: string; // String!
+    endAt: string; // String!
     id: number; // Int!
     questions: NexusGenRootTypes['Question'][]; // [Question!]!
-    start_at: string; // String!
+    startAt: string; // String!
     state: string; // String!
     title: string; // String!
   }
@@ -109,7 +109,7 @@ export type NexusGenScalarNames = "Boolean" | "Float" | "ID" | "Int" | "String";
 export type NexusGenUnionNames = never;
 
 export interface NexusGenTypes {
-  context: any;
+  context: context.Context;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   argTypes: NexusGenArgTypes;

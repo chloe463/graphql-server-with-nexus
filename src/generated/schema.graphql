@@ -27,10 +27,10 @@ type Question {
 
 type Questionnaire {
   description: String!
-  end_at: String!
+  endAt: String!
   id: Int!
   questions: [Question!]!
-  start_at: String!
+  startAt: String!
   state: String!
   title: String!
 }
